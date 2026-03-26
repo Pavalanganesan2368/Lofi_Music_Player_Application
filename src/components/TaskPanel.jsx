@@ -92,33 +92,33 @@ export default function TaskPanel() {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0
 
   return (
-    <div className="card flex flex-col gap-8 group" id="task-panel">
+    <div className="card flex flex-col gap-6 group h-full" id="task-panel">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-500">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
           <div>
-            <h2 className="font-bold text-gray-800 dark:text-gray-100 tracking-tight text-lg">Task Board</h2>
-            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest mt-0.5">Stay Organized</p>
+            <h2 className="font-black text-gray-800 dark:text-gray-100 tracking-tight text-base">Goal Board</h2>
+            <p className="text-[9px] text-brand-600 dark:text-brand-400 font-black uppercase tracking-widest">Focus List</p>
           </div>
         </div>
-        <span className="badge bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+        <span className="badge bg-blue-500/10 text-blue-500">
           {completed}/{total}
         </span>
       </div>
 
       {/* Progress bar */}
       {total > 0 && (
-        <div className="space-y-3">
-          <div className="flex justify-between items-end">
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Daily Progress</p>
-            <span className="text-[10px] font-black text-blue-500 tabular-nums">{percentage}%</span>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center px-1">
+            <p className="text-[9px] font-black text-gray-400 dark:text-gray-600 uppercase tracking-widest">Progress</p>
+            <span className="text-[9px] font-black text-blue-500 tabular-nums">{percentage}%</span>
           </div>
-          <div className="w-full h-2.5 bg-gray-100 dark:bg-gray-800/50 rounded-full overflow-hidden p-0.5 border border-gray-100/50 dark:border-gray-800/30">
+          <div className="w-full h-1.5 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+              className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000 ease-out"
               style={{ width: `${percentage}%` }}
             />
           </div>
@@ -132,59 +132,54 @@ export default function TaskPanel() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="What needs to be done?"
-          className="w-full pl-5 pr-14 py-4 rounded-2xl bg-gray-50/50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50
-                     text-sm text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500
-                     focus:outline-none focus:ring-2 focus:ring-blue-400/20 focus:border-blue-400 dark:focus:border-blue-500/50
+          placeholder="New goal..."
+          className="w-full pl-5 pr-14 py-3.5 rounded-[1.25rem] bg-gray-50/50 dark:bg-white/5 border border-gray-100 dark:border-white/5
+                     text-sm text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600
+                     focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50
                      transition-all duration-300"
-          id="task-input"
         />
         <button
           onClick={addTask}
           disabled={!input.trim()}
-          className="absolute right-2 top-2 w-10 h-10 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center 
+          className="absolute right-1.5 top-1.5 w-10 h-10 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center 
                      transition-all duration-300 active:scale-90 disabled:opacity-0 disabled:scale-90 shadow-lg shadow-blue-500/20"
-          id="task-add-btn"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
       </div>
 
       {/* Task list */}
-      <div className="flex flex-col gap-3 min-h-[200px] max-h-[380px] overflow-y-auto pr-2 custom-scrollbar">
+      <div className="flex-1 flex flex-col gap-2 overflow-y-auto pr-1 custom-scrollbar min-h-[300px]">
         {tasks.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center py-10 text-center opacity-40">
-            <div className="w-16 h-16 rounded-3xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <div className="flex-1 flex flex-col items-center justify-center py-10 opacity-30">
+            <div className="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-white/5 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
             </div>
-            <p className="text-xs font-bold uppercase tracking-widest text-gray-400">All clear for now</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Time to focus</p>
           </div>
         ) : (
           tasks.map((task) => (
             <div
               key={task.id}
-              className={`group/task flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300
+              className={`group/task flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 border
                 ${task.completed
-                  ? 'bg-gray-50/50 dark:bg-gray-800/10 opacity-70'
-                  : 'bg-white dark:bg-gray-800/30 hover:bg-gray-50 dark:hover:bg-gray-800/50'
-                } border border-gray-100 dark:border-gray-800/50 shadow-sm hover:shadow-md`}
+                  ? 'bg-gray-50/50 dark:bg-white/5 border-transparent opacity-60'
+                  : 'bg-white dark:bg-white/5 border-gray-100 dark:border-white/5 hover:border-blue-500/30'
+                }`}
             >
-              {/* Checkbox */}
               <button
                 onClick={() => toggleTask(task.id)}
-                className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center shrink-0 transition-all duration-500
+                className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center shrink-0 transition-all duration-300
                   ${task.completed
-                    ? 'bg-blue-500 border-blue-500 text-white scale-110'
+                    ? 'bg-blue-500 border-blue-500 text-white'
                     : 'border-gray-200 dark:border-gray-700 hover:border-blue-400'
                   }`}
-                id={`task-toggle-${task.id}`}
               >
                 {task.completed && (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 )}
               </button>
 
-              {/* Task text or edit input */}
               {editingId === task.id ? (
                 <input
                   ref={editRef}
@@ -196,30 +191,23 @@ export default function TaskPanel() {
                     if (e.key === 'Escape') cancelEdit()
                   }}
                   onBlur={() => saveEdit(task.id)}
-                  className="flex-1 px-3 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800
-                             text-sm text-gray-800 dark:text-gray-200 focus:outline-none"
+                  className="flex-1 bg-transparent text-sm text-gray-800 dark:text-gray-200 focus:outline-none"
                 />
               ) : (
                 <span
                   onClick={() => startEdit(task)}
-                  className={`flex-1 text-sm font-medium cursor-pointer transition-all duration-300 
-                    ${task.completed
-                      ? 'line-through text-gray-400 dark:text-gray-500'
-                      : 'text-gray-700 dark:text-gray-200'
-                    }`}
+                  className={`flex-1 text-sm font-bold cursor-pointer transition-all duration-300 
+                    ${task.completed ? 'line-through text-gray-400' : 'text-gray-700 dark:text-gray-200'}`}
                 >
                   {task.text}
                 </span>
               )}
 
-              {/* Delete button */}
               <button
                 onClick={() => deleteTask(task.id)}
-                className="opacity-0 group-hover/task:opacity-100 p-2 rounded-xl text-gray-300 hover:text-rose-500 hover:bg-rose-50 
-                           dark:hover:bg-rose-900/20 transition-all duration-300"
-                id={`task-delete-${task.id}`}
+                className="opacity-0 group-hover/task:opacity-100 p-1.5 text-gray-300 hover:text-rose-500 transition-all duration-300"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
               </button>
             </div>
           ))

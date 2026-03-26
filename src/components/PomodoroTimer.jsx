@@ -99,101 +99,71 @@ export default function PomodoroTimer() {
   }
 
   return (
-    <div className="card flex flex-col gap-8 group" id="pomodoro-timer">
-      {/* Completion flash overlay */}
-      {showAlert && (
-        <div className="fixed inset-0 z-[100] bg-emerald-500/10 animate-pulse pointer-events-none" />
-      )}
-
+    <div className="card flex flex-col gap-6 group h-full" id="pomodoro-timer">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/20 group-hover:scale-110 transition-transform duration-500">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <div>
-            <h2 className="font-bold text-gray-800 dark:text-gray-100 tracking-tight text-lg">Focus Timer</h2>
-            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest mt-0.5">Deep Work</p>
+            <h2 className="font-black text-gray-800 dark:text-gray-100 tracking-tight text-base">Timer</h2>
+            <p className="text-[9px] text-brand-600 dark:text-brand-400 font-black uppercase tracking-widest">Focus Mode</p>
           </div>
         </div>
         <span className={`badge ${statusBadge[status]}`}>
-          {status === 'idle' ? 'Ready' : status === 'running' ? 'Focusing' : 'Paused'}
+          {status}
         </span>
       </div>
 
-      {/* Timer display with circular progress */}
-      <div className="flex flex-col items-center py-6">
-        <div className="relative w-56 h-56 flex items-center justify-center">
-          {/* Background circle */}
+      {/* Timer display — More compact */}
+      <div className="flex flex-col items-center py-2">
+        <div className="relative w-32 h-32 flex items-center justify-center">
           <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" strokeWidth="4" className="text-gray-100 dark:text-gray-800/50" />
+            <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-100 dark:text-white/5" />
             <circle
-              cx="100" cy="100" r="92"
+              cx="100" cy="100" r="90"
               fill="none"
-              strokeWidth="8"
+              strokeWidth="6"
               strokeLinecap="round"
-              className="text-violet-500 dark:text-violet-400 transition-all duration-1000 ease-linear"
+              className="text-violet-500 transition-all duration-1000 ease-linear"
               style={{
-                strokeDasharray: `${2 * Math.PI * 92}`,
-                strokeDashoffset: `${2 * Math.PI * 92 * (1 - progress / 100)}`,
-                filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.3))'
+                strokeDasharray: `${2 * Math.PI * 90}`,
+                strokeDashoffset: `${2 * Math.PI * 90 * (1 - progress / 100)}`,
               }}
               stroke="currentColor"
             />
           </svg>
-          {/* Time display */}
-          <div className="text-center z-10">
-            <span className="text-6xl font-black tabular-nums tracking-tighter text-gray-800 dark:text-gray-100">
-              {formatTime(secondsLeft)}
-            </span>
-            <div className="flex items-center justify-center gap-2 mt-2">
-              <span className={`w-1.5 h-1.5 rounded-full ${status === 'running' ? 'bg-emerald-500 animate-pulse' : 'bg-gray-300 dark:bg-gray-600'}`}></span>
-              <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-                {status === 'running' ? 'Session active' : status === 'paused' ? 'Paused' : 'Idle'}
-              </p>
-            </div>
-          </div>
+          <span className="text-3xl font-black tabular-nums tracking-tighter text-gray-800 dark:text-gray-100">
+            {formatTime(secondsLeft)}
+          </span>
         </div>
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center gap-3">
         {status === 'running' ? (
-          <button onClick={pause} className="btn-primary bg-amber-500 hover:bg-amber-400 shadow-amber-500/20 w-32" id="pomo-pause-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.5"/><rect x="14" y="4" width="4" height="16" rx="1.5"/></svg>
+          <button onClick={pause} className="flex-1 py-3 bg-amber-500 hover:bg-amber-400 text-white font-bold rounded-2xl transition-all duration-300">
             Pause
           </button>
         ) : (
-          <button onClick={start} className="btn-primary bg-violet-600 hover:bg-violet-500 shadow-violet-600/20 w-32" id="pomo-start-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <button onClick={start} className="flex-1 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-2xl transition-all duration-300">
             {status === 'paused' ? 'Resume' : 'Start'}
           </button>
         )}
-        <button onClick={reset} className="btn-secondary w-32 group/reset" id="pomo-reset-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover/reset:rotate-180 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-          Reset
+        <button onClick={reset} className="p-3 bg-gray-100 dark:bg-white/5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-2xl transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
         </button>
       </div>
 
-      {/* Session counter */}
-      <div className="flex items-center justify-between px-2 pt-6 border-t border-gray-100 dark:border-gray-800/50">
-        <div className="flex items-center gap-2.5 text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">
-          <div className="w-1.5 h-1.5 rounded-full bg-violet-500"></div>
-          Sessions: <span className="text-gray-800 dark:text-gray-200">{sessions}</span>
+      {/* Sessions */}
+      <div className="flex items-center justify-between px-2 pt-4 border-t border-gray-100 dark:border-white/5">
+        <span className="text-[9px] font-black text-gray-400 dark:text-gray-600 uppercase tracking-widest">Sessions</span>
+        <div className="flex gap-1">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < (sessions % 4) ? 'bg-violet-500' : 'bg-gray-200 dark:bg-white/10'}`}></div>
+          ))}
         </div>
-
-        {/* Completion alert badge */}
-        {showAlert ? (
-          <span className="badge bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400 animate-bounce">
-            Excellent! 🎉
-          </span>
-        ) : (
-          <div className="flex gap-1">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < (sessions % 4) ? 'bg-violet-500' : 'bg-gray-200 dark:bg-gray-800'}`}></div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   )
