@@ -22,7 +22,7 @@ export default function QuoteSection() {
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 5000)
 
-      const response = await fetch('https://api.quotable.io/random', { signal: controller.signal })
+      const response = await fetch('https://zenquotes.io/api/random', { signal: controller.signal })
       clearTimeout(timeoutId)
 
       if (!response.ok) throw new Error('Failed to fetch')
