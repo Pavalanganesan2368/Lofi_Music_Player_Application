@@ -46,7 +46,7 @@ export default function QuoteSection() {
   }, [])
 
   return (
-    <div className="card h-full min-h-[200px] bg-gradient-to-br from-indigo-500/5 to-purple-500/5 group/quote overflow-hidden border-indigo-100/20 dark:border-indigo-500/10 flex flex-col md:flex-row items-center gap-8 px-10" id="quote-section">
+    <div className="card h-full min-h-[200px] bg-gradient-to-br from-indigo-500/5 to-purple-500/5 group/quote overflow-hidden border-indigo-100/20 dark:border-indigo-500/10 flex flex-col md:flex-row items-center gap-6 md:gap-8 px-6 sm:px-10 py-8 md:py-0" id="quote-section">
       <div className="flex flex-col items-center gap-3 shrink-0">
         <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 transition-transform duration-500 group-hover/quote:scale-110">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v7c0 1.25.75 2 2 2h4c0 3-4 4-4 4"/><path d="M14 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v7c0 1.25.75 2 2 2h4c0 3-4 4-4 4"/></svg>

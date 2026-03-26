@@ -18,18 +18,18 @@ export default function GreetingWidget() {
   const dateString = time.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })
 
   return (
-    <div className="card bg-gradient-to-br from-brand-500/10 to-transparent border-brand-500/10 flex flex-col justify-between h-full min-h-[160px]">
-      <div className="flex justify-between items-start">
+    <div className="card bg-gradient-to-br from-brand-500/10 to-transparent border-brand-500/10 flex flex-col justify-between h-full min-h-[160px] p-6 sm:p-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
         <div>
-          <h2 className="text-3xl font-black text-gray-800 dark:text-gray-100 tracking-tight mb-1">
+          <h2 className="text-2xl sm:text-3xl font-black text-gray-800 dark:text-gray-100 tracking-tight mb-1">
             {greeting}, <span className="text-brand-600 dark:text-brand-400">Focus!</span>
           </h2>
-          <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
+          <p className="text-[10px] sm:text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
             {dateString}
           </p>
         </div>
-        <div className="px-4 py-2 rounded-2xl bg-white/50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800/50 shadow-sm backdrop-blur-sm">
-          <span className="text-xl font-black tabular-nums text-gray-800 dark:text-gray-100">
+        <div className="px-4 py-2 rounded-2xl bg-white/50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800/50 shadow-sm backdrop-blur-sm shrink-0">
+          <span className="text-lg sm:text-xl font-black tabular-nums text-gray-800 dark:text-gray-100">
             {timeString}
           </span>
         </div>
